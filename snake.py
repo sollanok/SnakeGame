@@ -16,35 +16,12 @@ from freegames import square, vector
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
-# variables de colores:
-colors = ['black', 'blue', 'green', 'yellow', 'purple']
-food_color_index = 0
-snake_color_index = 0
-food_color = 'black'
-snake_color = 'black'
-executed = False
+
 
 def change(x, y):
     """Change snake direction."""
     aim.x = x
     aim.y = y
-
-# Cada vez que se corra el juego, 
-# la víbora y la comida deberán tener colores diferentes entre sí, 
-# pero al azar, de una serie de 5 diferentes colores, excepto el rojo.
-def random_color(colors):  
-    global executed, food_color, snake_color
-    if not executed:
-        food_color_index = randrange(0,5)
-        while True:
-            snake_color_index = randrange(0,5)  
-            if snake_color_index != food_color_index:
-                break
-        food_color = colors[food_color_index]
-        snake_color = colors[snake_color_index]
-        executed = True
-    
-    return food_color, snake_color
 
 
 def inside(head):
@@ -80,9 +57,9 @@ def move():
         food.y += 10
 
     for body in snake:
-        square(body.x, body.y, 9, random_color(colors)[0]) # llama funcion de color a la serpiente
+        square(body.x, body.y, 9, 'black')
 
-    square(food.x, food.y, 9, random_color(colors)[1]) # llama funcion de color a la comida
+    square(food.x, food.y, 9, 'green')
     update()
     ontimer(move, 100)
 
